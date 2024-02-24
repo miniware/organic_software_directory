@@ -10,6 +10,32 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
+ * (We don't require tree because of tailwind)
  *= require_self
  */
+
+@font-face {
+  src: url("FernVariable-Roman-VF.woff2") format("woff2");
+  font-family: "Fern";
+  font-style: normal;
+  font-weight: 400 800;
+}
+
+@font-face {
+  src: url("FernVariable-Italic-VF.woff2") format("woff2");
+  font-family: "Fern";
+  font-style: italic;
+  font-weight: 400 800;
+}
+
+@font-face {
+  src: url("Polliwog-Regular.woff2") format("woff2");
+  font-family: "Polliwog";
+  font-style: normal;
+  font-weight: normal;
+}
+
+
+body {
+  font-family: "Polliwog";
+}

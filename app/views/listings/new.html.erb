@@ -1,0 +1,16 @@
+<%= form_with model: @listing, local: true do | form | %>
+  <div class="field">
+    <%= form.label :link %>
+    <%= form.url_field :link, class: "input", required: true %>
+  </div>
+
+  <% if @listing.errors.any? %>
+    <div id="error_explanation" class="italic">
+      <%= @listing.errors.full_messages.to_sentence %>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit class: "button is-link" %>
+  </div>
+<% end %>

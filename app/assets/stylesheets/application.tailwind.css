@@ -7,3 +7,16 @@
     @apply block;
   }
 }
+
+@layer components {
+  [type="text"],
+  [type="url"],
+  [type="email"],
+  [type="password"] {
+    @apply text-black bg-white/10 active:bg-white/20;
+  }
+
+  [type="submit"] {
+    @apply cursor-pointer;
+  }
+}

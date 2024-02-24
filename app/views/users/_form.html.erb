@@ -2,11 +2,11 @@
   <div class="grid grid-cols-2 gap-4">
     <div class="field">
       <%= form.label :email %>
-      <%= form.text_field :email, class: "input", disabled: user.persisted? %>
+      <%= form.text_field :email, required: true, class: "input", disabled: user.persisted? %>
     </div>
     <div class="field">
       <%= form.label :handle %>
-      <%= form.text_field :handle, class: "input", disabled: user.persisted? %>
+      <%= form.text_field :handle, required: true, class: "input", disabled: user.persisted? %>
     </div>
   </div>
   <div class="field">

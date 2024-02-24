@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_23_165629) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_24_173752) do
+  create_table "listings", force: :cascade do |t|
+    t.string "title"
+    t.string "link"
+    t.string "icon"
+    t.string "cover"
+    t.text "description"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_listings_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "handle"
@@ -21,4 +33,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_23_165629) do
     t.index ["handle"], name: "index_users_on_handle", unique: true
   end
 
+  add_foreign_key "listings", "users"
 end

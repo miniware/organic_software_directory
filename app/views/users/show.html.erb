@@ -1,0 +1,6 @@
+<div>
+  <h1 class="font-bold text-4xl font-display"><%= @user.handle %></h1>
+  <% if @user.bio.present? %>
+    <p><%= @user.bio %></p>
+  <% end %>
+</div>

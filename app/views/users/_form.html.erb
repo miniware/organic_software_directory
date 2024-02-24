@@ -1,0 +1,19 @@
+<%= form_with model: user, local: true do |form| %>
+  <div class="grid grid-cols-2 gap-4">
+    <div class="field">
+      <%= form.label :email %>
+      <%= form.text_field :email, class: "input", disabled: user.persisted? %>
+    </div>
+    <div class="field">
+      <%= form.label :handle %>
+      <%= form.text_field :handle, class: "input", disabled: user.persisted? %>
+    </div>
+  </div>
+  <div class="field">
+    <%= form.label :bio %>
+    <%= form.text_area :bio, class: "textarea" %>
+  </div>
+  <div class="actions">
+    <%= form.submit class: "button is-link" %>
+  </div>
+<% end %>

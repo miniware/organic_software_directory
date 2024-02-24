@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  email: kermit@rainbowconnection.com
+  handle: kermitTHEfrog
+  bio: Loves playing the banjo and singing.
+
+two:
+  email: misspiggy@muppets.nyc
+  handle: ItIsMoi
+  bio: Fashion-forward diva with a passion for singing and drama.

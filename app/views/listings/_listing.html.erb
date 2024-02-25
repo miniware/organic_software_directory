@@ -3,12 +3,12 @@
   <div class="flex-1 flex flex-col gap-1">
     <header>
       <% if controller.action_name == 'show' %>
-        <h1>
+        <h2>
           <%= link_to @listing.link do %>
             <span class="font-bold text-3xl"><%= @listing.title %></span>
             <span class="inline-block ml-1 text-sm opacity-50 hover:underline"><%= @listing.link %></span>
           <% end %>
-        </h1>
+        </h2>
       <% else %>
         <h3>
           <%= link_to listing.title, listing, class: "font-bold text-xl" %>

@@ -9,14 +9,44 @@
 }
 
 @layer components {
-  [type="text"],
-  [type="url"],
-  [type="email"],
-  [type="password"] {
-    @apply text-black bg-white/10 active:bg-white/20;
+  .field, .input {
+    @apply w-full;
+  }
+  .input {
+    @apply text-orange-950 border-none
+    bg-orange-950/5 focus:bg-orange-950/10
+    dark:bg-white/10 dark:focus:bg-white/20;
+
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
   }
 
-  [type="submit"] {
-    @apply cursor-pointer;
+  .button {
+    @apply cursor-pointer
+      inline-block rounded-lg p-2 leading-none
+      border border-orange-950/10 hover:bg-orange-950/10
+        dark:border-white/10 dark:hover:bg-white/10;
+  }
+
+  #new-listing-form {
+    @apply flex w-full gap-4 p-1 rounded-xl border
+      bg-white/20 border-orange-950/5
+      focus-within:bg-white/30 focus-within:border-orange-950/10;
+
+    & form {
+      @apply contents;
+    }
+
+    & .input {
+      all: unset;
+      @apply px-2 flex-1;
+    }
+
+    & .button {
+      @apply border-none bg-amber-500 text-white;
+      font-variant: all-small-caps;
+    }
   }
 }

@@ -5,28 +5,23 @@ class ListingsController < ApplicationController
   end
 
   def index
+    @new_listing = Listing.new
     @listings = Listing.all
   end
 
-  def new
-    @listing = Listing.new
+  def edit
   end
 
   def create
     @listing = Listing.new(listing_params)
     @listing.user ||= User.first # TODO: TEMPORARY
 
-    # @listing.fill_in_details_from_og_meta_tags
-
     if @listing.save
-      redirect_to @listing, notice: "Listing was successfully created."
+      redirect_to edit_listing_path(@listing), notice: "Listing was successfully created."
     else
       puts @listing.errors.full_messages.to_sentence
-      render :new, status: :unprocessable_entity
+      render :edit, status: :unprocessable_entity
     end
-  end
-
-  def edit
   end
 
   def update

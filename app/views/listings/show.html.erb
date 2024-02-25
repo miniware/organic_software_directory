@@ -1,4 +1,13 @@
-<div>
-  <h1 class="font-bold text-4xl">Listings#show</h1>
-  <p>Find me in app/views/listings/show.html.erb</p>
+<div class="" id="<%= dom_id @listing %>">
+  <% if @listing.icon.present? %>
+    <img src="<%= @listing.icon %>" alt="<%= @listing.title %>'s Icon">
+  <% end %>
+  <header class="">
+    <h1 class="font-bold text-4xl"><%= @listing.title %></h1>
+    <p><%= link_to @listing.link, class: "font-mono" %></p>
+  </header>
+
+  <% if @listing.description.present? %>
+    <p><%= @listing.description %></p>
+  <% end %>
 </div>

@@ -1,1 +1,9 @@
-<%= render @listings %>
+<div id="new-listing-form">
+  <%= form_with model: @new_listing, local: true do | form | %>
+    <%= form.url_field :link, class: "input", placeholder: "Paste a link", required: true %>
+    <%= form.submit "+ add Product", class: "button is-link" %>
+  <% end %>
+</div>
+<ol>
+  <%= render @listings %>
+</ol>

@@ -1,6 +1,13 @@
-<div>
+<div id="<%= dom_id(@user) %>" class="contents">
   <h1 class="font-bold text-4xl font-display"><%= @user.handle %></h1>
   <% if @user.bio.present? %>
-    <p><%= @user.bio %></p>
+    <p class="text-lg"><%= @user.bio %></p>
+  <% end %>
+
+  <% if current_user && current_user == @user %>
+    <nav class="flex gap-1">
+      <%= link_to "Update Profile", edit_user_path(current_user), class: "button" %>
+      <%= link_to "Sign Out", auth_sign_out_path, class: "button" %>
+    </nav>
   <% end %>
 </div>

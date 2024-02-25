@@ -1,3 +1,9 @@
 <header class="p-4 flex justify-between">
   <h1 class="font-display text-lg"><%= link_to "Organic Software Directory", root_url %></h1>
+
+  <% if current_user %>
+    <%= link_to "@" + current_user.handle, current_user, class: "button" %>
+  <% else %>
+    <%= link_to "Login", auth_sign_in_path, class: "button" %>
+  <% end %>
 </header>

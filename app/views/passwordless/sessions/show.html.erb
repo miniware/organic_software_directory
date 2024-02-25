@@ -1,0 +1,14 @@
+<%= turbo_frame_tag "signing_in", class: "contents" do %>
+
+  <p class="text-lg mb-4">Sweet! If you're in the system, we sent you an email with everything you need.</p>
+
+  <%= form_with(model: @session, url: url_for(action: 'update'), scope: 'passwordless', method: 'patch', data: { turbo: false }) do |f| %>
+    <%= f.label :token %>
+    <%= f.text_field :token,
+        required: true,
+        autofocus: true,
+        class: "input",
+        autocomplete: "one-time-code" %>
+    <%= f.submit t(".confirm"), class: "button float-right mt-2" %>
+  <% end %>
+<% end %>

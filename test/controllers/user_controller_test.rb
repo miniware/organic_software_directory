@@ -23,12 +23,14 @@ class UserControllerTest < ActionDispatch::IntegrationTest
 
   test "should get edit" do
     user = users(:one)
+    passwordless_sign_in(user)
     get edit_user_url(user)
     assert_response :success
   end
 
   test "should update user" do
     user = users(:one)
+    passwordless_sign_in(user)
     patch user_url(user), params: {user: {bio: "Updated bio"}}
     assert_redirected_to user_url(user)
   end

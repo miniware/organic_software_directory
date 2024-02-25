@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :listings
 
+  passwordless_with :email
   validates :email,
     presence: true,
     uniqueness: true,

@@ -24,7 +24,7 @@
   .textarea {
     @apply text-orange-950 border-none
     bg-orange-950/5 focus:bg-orange-950/10
-    dark:bg-white/10 dark:focus:bg-white/20;
+    dark:text-orange-200 dark:bg-white/10 dark:focus:bg-white/20;
 
     &:focus {
       outline: none;

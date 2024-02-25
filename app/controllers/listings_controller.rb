@@ -1,4 +1,5 @@
 class ListingsController < ApplicationController
+  before_action :require_user!, except: [:index, :show]
   before_action :set_listing, only: [:show, :edit, :update]
 
   def show
@@ -13,8 +14,8 @@ class ListingsController < ApplicationController
   end
 
   def create
-    @listing = Listing.new(listing_params)
-    @listing.user ||= User.first # TODO: TEMPORARY
+    @listing = current_user.listings.new(listing_params)
+    # @listing.user = current_user
 
     if @listing.save
       redirect_to edit_listing_path(@listing), notice: "Listing was successfully created."

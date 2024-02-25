@@ -44,7 +44,7 @@
   }
 
   #new-listing-form {
-    @apply flex w-full gap-4 p-1 rounded-xl border
+    @apply md:flex gap-2 items-center w-full md:text-xl px-3 py-1 rounded-xl border
       bg-white/20 border-orange-950/5
       focus-within:bg-white/30 focus-within:border-orange-950/10;
 
@@ -54,7 +54,11 @@
 
     & .input {
       all: unset;
-      @apply px-2 flex-1;
+      @apply flex-1;
+
+      &::placeholder {
+        font-style: italic;
+      }
     }
 
     & .button {

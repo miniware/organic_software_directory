@@ -1,9 +1,11 @@
 <div id="new-listing-form">
   <%= form_with model: @new_listing, local: true do | form | %>
-    <%= form.url_field :link, class: "input", placeholder: "Paste a link", required: true %>
-    <%= form.submit "+ add Product", class: "button is-link" %>
+    <%= form.label :link, "List a Product!", class: "font-display tracking-wide text-orange-500" %>
+    <%= form.url_field :link, class: "input",
+        placeholder: "Paste a link and hit enter...", required: true %>
+    <%= form.submit "+ add Product", class: "sr-only" %>
   <% end %>
 </div>
-<ol>
+<ol class="flex flex-col gap-8">
   <%= render @listings %>
 </ol>

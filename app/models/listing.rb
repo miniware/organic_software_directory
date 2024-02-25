@@ -2,7 +2,7 @@ class Listing < ApplicationRecord
   belongs_to :user
 
   before_validation :fill_in_details_from_og_meta_tags
-  validate :not_posted_recently
+  validate :not_posted_recently, on: :create
 
   validates :link, presence: true,
     format: {with: URI::DEFAULT_PARSER.make_regexp, message: "must be a valid URL"}
@@ -15,8 +15,6 @@ class Listing < ApplicationRecord
   private
 
   def fill_in_details_from_og_meta_tags
-    return if title.present? && icon.present?
-
     begin
       page = MetaInspector.new(link)
       self.title ||= page.best_title
@@ -29,7 +27,7 @@ class Listing < ApplicationRecord
   end
 
   def find_apple_touch_icon(page)
-    page.links.all.find { |l| l.include?('rel="apple-touch-icon"') }
+    page.images.all.find { |l| l.include?('rel="apple-touch-icon"') }
   end
 
   def not_posted_recently

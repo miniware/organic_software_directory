@@ -4,15 +4,24 @@
 
 @layer base {
   label {
-    @apply block;
+    @apply block text-sm;
+    font-variation-settings: "opsz" 8;
+  }
+
+
+  [disabled],
+  .disabled {
+    @apply opacity-50 cursor-not-allowed;
   }
 }
 
 @layer components {
-  .field, .input {
+  .field, .input, .textarea {
     @apply w-full;
   }
-  .input {
+
+  .input,
+  .textarea {
     @apply text-orange-950 border-none
     bg-orange-950/5 focus:bg-orange-950/10
     dark:bg-white/10 dark:focus:bg-white/20;
@@ -21,6 +30,10 @@
       outline: none;
       box-shadow: none;
     }
+  }
+
+  .textarea {
+    resize: none;
   }
 
   .button {
@@ -46,7 +59,12 @@
 
     & .button {
       @apply border-none bg-amber-500 text-white;
-      font-variant: all-small-caps;
     }
+  }
+}
+
+@layer utilities {
+  .small-caps {
+    font-variant: all-small-caps;
   }
 }

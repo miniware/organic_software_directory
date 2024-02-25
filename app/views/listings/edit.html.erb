@@ -1,25 +1,29 @@
 <%= form_with model: @listing, local: true do |form| %>
-  <div class="field">
-    <%= form.label :icon %>
-    <%= form.text_field :icon, class: "input" %>
-  </div>
-  <div class="field">
-    <%= form.label :cover %>
-    <%= form.text_field :cover, class: "input" %>
-  </div>
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title, required: true, class: "input" %>
-  </div>
-  <div class="field">
-    <%= form.label :link %>
-    <%= form.url_field :link, class: "input", required: true %>
-  </div>
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description, class: "textarea" %>
-  </div>
-  <div class="actions">
-    <%= form.submit class: "button is-link" %>
+  <div class="flex gap-4 text-sm">
+    <div class="field-group flex flex-col gap-4">
+      <div class="field">
+        <%= render "icon", listing: @listing %>
+        <%= form.label :icon %>
+        <%= form.text_field :icon, class: "input" %>
+      </div>
+      <div class="field">
+        <%= image_tag( listing.cover, alt: "#{listing.title} cover", class: "rounded") if listing.cover.present? %>
+        <%= form.label :cover %>
+        <%= form.text_field :cover, class: "input" %>
+      </div>
+    </div>
+    <div class="flex-1 flex flex-col gap-4">
+      <div class="field">
+        <%= form.label :title %>
+        <%= form.text_field :title, required: true, class: "input text-xl" %>
+      </div>
+      <div class="field">
+        <%= form.label :description %>
+        <%= form.text_area :description, rows: 2, class: "textarea" %>
+      </div>
+      <div class="actions float-right">
+        <%= form.submit class: "button is-link" %>
+      </div>
+    </div>
   </div>
 <% end %>

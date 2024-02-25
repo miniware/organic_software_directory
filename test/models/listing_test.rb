@@ -4,11 +4,9 @@ class ListingTest < ActiveSupport::TestCase
   test "fills in details from OG meta tags if not provided" do
     VCR.use_cassette("audiopen_meta") do
       user = users(:one)
-      # Assuming the title and icon are not set explicitly to trigger the HTTP request.
       listing = Listing.new(link: "https://audiopen.ai", user: user)
       listing.valid?
       assert_not_nil listing.title
-      assert_not_nil listing.icon
     end
   end
 

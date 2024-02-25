@@ -1,0 +1,11 @@
+<% if listing.icon.present? %>
+  <%= image_tag(
+  listing.icon,
+  alt: "#{listing.title} icon",
+  class: "size-8 rounded shadow"
+) %>
+<% else %>
+  <div class="size-8 leading-8 p-px text-center font-bold font-display text-3xl text-white bg-black/50 overflow-hidden rounded-lg">
+    <%= listing&.title.first %>
+  </div>
+<% end %>

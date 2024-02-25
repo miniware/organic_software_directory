@@ -1,4 +1,30 @@
-<div class="max-w-sm rounded overflow-hidden shadow-lg">
-  <%= image_tag(listing.icon, alt: "#{listing.title} icon", class: "w-10 h-10") %>
-  <h3 class="font-bold text-xl mb-2"><%= link_to listing.title, listing.link %></h3>
-</div>
+<article class="flex gap-2 place-content-start">
+  <%= render "icon", listing: listing %>
+  <div class="flex-1 flex flex-col gap-1">
+    <header>
+      <% if controller.action_name == 'show' %>
+        <h1>
+          <%= link_to @listing.link do %>
+            <span class="font-bold text-3xl"><%= @listing.title %></span>
+            <span class="inline-block ml-1 text-sm opacity-50 hover:underline"><%= @listing.link %></span>
+          <% end %>
+        </h1>
+      <% else %>
+        <h3>
+          <%= link_to listing.title, listing, class: "font-bold text-xl" %>
+          <%= link_to listing.link, listing.link, class: "text-sm opacity-50 hover:underline" %>
+        </h3>
+      <% end %>
+      <% if listing.description.present? %>
+        <p><%= listing.description %></p>
+      <% end %>
+    </header>
+    <footer class="flex gap-2 text-sm opacity-50">
+      <p>Posted <%= time_ago_in_words(listing.created_at) %> ago</p>
+      <% unless controller.action_name == 'show' %>
+        <span>•</span>
+        <%= link_to "Discuss", listing_path(listing), class: "font-medium hover:underline" %>
+      <% end %>
+    </footer>
+  </div>
+</article>

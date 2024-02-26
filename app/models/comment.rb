@@ -4,4 +4,5 @@ class Comment < ApplicationRecord
   has_many :comments, as: :commentable
 
   validates :body, presence: true
+  normalizes :body, with: ->(body) { body.strip }
 end

@@ -4,11 +4,12 @@ Rails.application.routes.draw do
   passwordless_for :users, at: "/", as: :auth
   resources :users, except: [:index, :new, :destroy]
 
-  resources :comments, only: [:edit, :update, :destoy]
   resources :listings, except: [:new, :destroy, :index] do
-    resources :comments, shallow: true do
-      resources :comments, shallow: true
-    end
+    resources :comments, only: :create, module: :listings
+  end
+
+  resources :comments, except: [:create, :index] do
+    resources :comments, only: :create, module: :comments
   end
 
   root "listings#index"

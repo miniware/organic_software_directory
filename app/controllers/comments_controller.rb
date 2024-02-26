@@ -2,18 +2,12 @@ class CommentsController < ApplicationController
   before_action :require_user!
 
   def create
-    @commentable = if params[:listing_id]
-      Listing.find(params[:listing_id])
-    elsif params[:comment_id]
-      Comment.find(params[:comment_id])
-    end
-
     @comment = @commentable.comments.new(comment_params)
     @comment.user = current_user
     if @comment.save
-      render turbo_stream: turbo_stream.prepend("comments", @comment)
+      render turbo_stream: turbo_stream.prepend(comment_section_id, partial: "comments/comment", locals: {comment: @comment})
     else
-      render turbo_stream: turbo_stream.replace(@comment, partial: "comments/form", locals: {comment: @comment, commentable: @comment.commentable})
+      render turbo_stream: turbo_stream.replace(@comment, partial: "comments/form", locals: {comment: @comment})
     end
   end
 
@@ -28,6 +22,10 @@ class CommentsController < ApplicationController
   end
 
   private
+
+  def comment_section_id
+    "comments_for_#{@commentable.model_name.param_key}_#{@commentable.id}"
+  end
 
   def comment_params
     params.require(:comment).permit(:body)

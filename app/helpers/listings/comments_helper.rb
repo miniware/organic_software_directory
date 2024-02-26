@@ -1,0 +1,2 @@
+module Listings::CommentsHelper
+end

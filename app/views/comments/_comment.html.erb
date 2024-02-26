@@ -1,10 +1,6 @@
 <% unless comment.new_record? # don't render the new comment from the form %>
   <%= turbo_frame_tag dom_id(comment) do %>
-    <li class="space-y-1">
-      <header class="text-xs opacity-50">
-        <% username = current_user == comment.user ? "You" : "@" + comment.user.handle %>
-        <p><%= link_to username, comment.user, class: "font-bold hover:underline" %> posted <%= time_ago_in_words(comment.created_at) %> ago:</p>
-      </header>
+    <li class="comment flex flex-col gap-1">
 
       <%= turbo_frame_tag dom_id(comment, :body) do %>
         <blockquote class="border-l pl-2 ml-1.5 border-orange-300 dark:border-white/20">
@@ -12,19 +8,25 @@
 
           <% if current_user %>
             <nav class="flex gap-2 text-xs opacity-50">
+              <% username = current_user == comment.user ? "You" : "@" + comment.user.handle %>
+              <span><%= link_to username, comment.user, class: "font-bold hover:underline" %> posted <%= time_ago_in_words(comment.created_at) %> ago.</span>
+              <%= link_to "Reply", "#", class: "hover:underline", data: {
+                action: "click->reply#new",
+                comment_id: dom_id(comment)
+              } %>
               <%= button_to "Delete", comment_path(comment), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "hover:underline" if current_user == comment.user %>
             </nav>
           <% end %>
         </blockquote>
       <% end %>
 
-      <turbo-frame id="<%= dom_id(comment, :new_reply) %>" />
-
-      <% if comment.comments.any? %>
-        <ol>
-          <%= render partial: "comments/comment", collection: comment.comments, as: :comment %>
-        </ol>
+      <%= content_tag :template, id: dom_id(comment, :reply_form) do %>
+        <%= render "comments/form", comment: comment.comments.build %>
       <% end %>
+
+      <ol class="pl-2.5 mt-1" id="<%= dom_id(comment, :comments_for) %>">
+        <%= render partial: "comments/comment", collection: comment.comments, as: :comment %>
+      </ol>
     </li>
   <% end %>
 <% end %>

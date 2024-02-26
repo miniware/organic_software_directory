@@ -1,12 +1,14 @@
+<% is_listing_show = controller_path == 'listings' && action_name == 'show'  %>
+
 <article class="flex gap-2 place-content-start">
-  <%= render "icon", listing: listing %>
+  <%= render "listings/icon", listing: listing %>
   <div class="flex-1 flex flex-col gap-1">
     <header>
-      <% if controller.action_name == 'show' %>
+      <% if is_listing_show %>
         <h2>
-          <%= link_to @listing.link do %>
-            <span class="font-bold text-3xl"><%= @listing.title %></span>
-            <span class="inline-block ml-1 text-sm opacity-50 hover:underline"><%= @listing.link %></span>
+          <%= link_to listing.link do %>
+            <span class="font-bold text-3xl"><%= listing.title %></span>
+            <span class="inline-block ml-1 text-sm opacity-50 hover:underline"><%= listing.link %></span>
           <% end %>
         </h2>
       <% else %>
@@ -21,7 +23,7 @@
     </header>
     <footer class="flex gap-2 text-sm opacity-50">
       <p>Posted <%= time_ago_in_words(listing.created_at) %> ago</p>
-      <% unless controller.action_name == 'show' %>
+      <% unless is_listing_show %>
         <span>•</span>
         <%= link_to listing.comments.count > 0 ? "#{listing.comments.count} comments" : "Start the conversation!", listing_path(listing), class: "font-medium hover:underline" %>
       <% end %>

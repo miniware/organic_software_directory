@@ -16,15 +16,13 @@ class Listing < ApplicationRecord
   private
 
   def fill_in_details_from_og_meta_tags
-    begin
-      page = MetaInspector.new(link)
-      self.title ||= page.best_title
-      self.description ||= page.best_description
-      self.icon ||= find_apple_touch_icon(page) || page.images.favicon
-      self.cover ||= page.images.best
-    rescue => e
-      Rails.logger.error "MetaInspector failed for #{link}: #{e.message}"
-    end
+    page = MetaInspector.new(link)
+    self.title ||= page.best_title
+    self.description ||= page.best_description
+    self.icon ||= find_apple_touch_icon(page) || page.images.favicon
+    self.cover ||= page.images.best
+  rescue => e
+    Rails.logger.error "MetaInspector failed for #{link}: #{e.message}"
   end
 
   def find_apple_touch_icon(page)

@@ -12,3 +12,14 @@ User.create!({
   email: "nick@miniware.team",
   handle: "nickisnoble"
 })
+
+[
+  "https://kinopio.club/",
+  "https://audiopen.ai/",
+  "https://rubyonrails.org/"
+].each do |link|
+  Listing.create!(
+    link: link,
+    user: User.first
+  ) # Images don't populate for some reason, but other meta things do.
+end

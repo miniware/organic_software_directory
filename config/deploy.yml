@@ -25,6 +25,7 @@ registry:
 env:
   secret:
     - RAILS_MASTER_KEY
+    - LITESTACK_DATA_PATH
 
 
 # Configure builder setup.

@@ -23,7 +23,7 @@
       <p>Posted <%= time_ago_in_words(listing.created_at) %> ago</p>
       <% unless controller.action_name == 'show' %>
         <span>•</span>
-        <%= link_to "Discuss", listing_path(listing), class: "font-medium hover:underline" %>
+        <%= link_to listing.comments.count > 0 ? "#{listing.comments.count} comments" : "Start the conversation!", listing_path(listing), class: "font-medium hover:underline" %>
       <% end %>
     </footer>
   </div>

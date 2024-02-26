@@ -1,5 +1,6 @@
 class Listing < ApplicationRecord
   belongs_to :user
+  has_many :comments, as: :commentable, dependent: :destroy
 
   before_validation :fill_in_details_from_og_meta_tags
   validate :not_posted_recently, on: :create

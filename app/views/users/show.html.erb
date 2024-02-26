@@ -3,11 +3,23 @@
   <% if @user.bio.present? %>
     <p class="text-lg"><%= @user.bio %></p>
   <% end %>
-
   <% if current_user && current_user == @user %>
     <nav class="flex gap-1">
       <%= link_to "Update Profile", edit_user_path(current_user), class: "button" %>
       <%= link_to "Sign Out", auth_sign_out_path, class: "button" %>
     </nav>
   <% end %>
+  <div class="flex flex-col gap-4">
+    <h3 class="text-xl border-b border-black/30">Activity</h3>
+    <% @user.comments.group_by(&:commentable).each do |commentable, comments| %>
+      <header>
+        <% if commentable.is_a?(Listing) %>
+          <h4 class="font-bold text-lg">Comments on <%= link_to commentable.title, commentable, class: "italic hover:underline" %>:</h4>
+        <% end %>
+      </header>
+      <ol>
+        <%= render comments %>
+      </ol>
+    <% end %>
+  </div>
 </div>

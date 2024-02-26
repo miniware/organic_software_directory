@@ -1,7 +1,7 @@
 ENV["RAILS_ENV"] ||= "test"
 require_relative "../config/environment"
 require "rails/test_help"
-require "passwordless/test_helpers"
+require "passwordless/test_helpers" # TODO: This isn't actually working
 require "vcr"
 
 VCR.configure do |config|

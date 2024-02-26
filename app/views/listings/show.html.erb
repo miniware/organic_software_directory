@@ -1,3 +1,12 @@
-<div id="<%= dom_id @listing %>" class="flex flex-col gap-4">
+<div id="<%= dom_id @listing %>" class="flex flex-col gap-8">
   <%= render @listing %>
+
+  <div class="flex flex-col gap-4">
+    <h3 class="text-xl border-b border-black/30">Discusson</h3>
+    <%= render "comments/form", comment: @listing.comments.build %>
+
+    <ol class="flex flex-col gap-4" id="comments">
+      <%= render @listing.comments.order(created_at: :desc) %>
+    </ol>
+  </div>
 </div>

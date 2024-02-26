@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :listings
+  has_many :comments
 
   passwordless_with :email
   validates :email,

@@ -32,3 +32,7 @@ group :test do
   gem "vcr", "~> 6.2"
   gem "webmock", "~> 3.22"
 end
+
+gem "dockerfile-rails", ">= 1.6", :group => :development
+
+gem "pg", "~> 1.5"

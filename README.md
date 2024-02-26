@@ -17,7 +17,7 @@ This thing is just taking it's first steps. We are still missing a few crucial f
 
 It currently doesn't meet the criteria because we haven't figured out sustainable funding. At the moment, the bills are covered by Miniware.
 
-There are a few ideas floating around in discussions though, please weigh in!
+There are a few ideas floating around in discussions though, [please weigh in](https://github.com/miniware/organic_software_directory/discussions/2#discussion-6277074)!
 
 ## Contributing
 
@@ -40,6 +40,4 @@ $ bundle
 $ rails db:setup
 $ ./bin/dev
 $ open localhost:3000
-```
-
 ```

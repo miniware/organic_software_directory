@@ -38,3 +38,6 @@
 !/app/assets/builds/.keep
 
 .DS_Store
+# Ignore default Litestack SQLite databases.
+/db/**/*.sqlite3
+/db/**/*.sqlite3-*

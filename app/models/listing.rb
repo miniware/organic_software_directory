@@ -9,7 +9,7 @@ class Listing < ApplicationRecord
     format: {with: URI::DEFAULT_PARSER.make_regexp, message: "must be a valid URL"}
 
   validates :icon, :cover,
-    format: {with: URI::DEFAULT_PARSER.make_regexp, message: "must be a valid URL", allow_nil: true}
+    format: {with: URI::DEFAULT_PARSER.make_regexp, message: "must be a valid URL", allow_blank: true}
 
   validates :title, presence: true
 

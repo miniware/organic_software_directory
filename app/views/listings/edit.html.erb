@@ -18,6 +18,7 @@
       </div>
       <div class="actions float-right">
         <%= form.submit class: "button is-link" %>
+        <%= @listing.errors.full_messages.to_sentence if @listing.errors.any? %>
       </div>
     </div>
   </div>

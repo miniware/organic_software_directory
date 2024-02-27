@@ -17,7 +17,6 @@ gem "metainspector", "~> 5.15"
 gem "passwordless", "~> 1.4"
 
 gem "sqlite3", "~> 1.4"
-gem "litestack", "~> 0.4.3"
 
 group :development, :test do
   gem "debug", platforms: %i[mri windows]
@@ -34,3 +33,5 @@ group :test do
   gem "vcr", "~> 6.2"
   gem "webmock", "~> 3.22"
 end
+
+gem "postmark-rails", "~> 0.22.1"

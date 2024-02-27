@@ -11,6 +11,7 @@
 <% else %>
   <%= link_to "Sign in to list products!", auth_sign_in_path, class: "font-bold hover:underline" %>
 <% end %>
+
 <ol class="flex flex-col gap-8">
   <%= render @listings %>
 </ol>

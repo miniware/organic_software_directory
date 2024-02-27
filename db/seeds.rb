@@ -1,25 +1,11 @@
 # This file should ensure the existence of records required to run the application in every environment (production,
 # development, test). The code here should be idempotent so that it can be executed at any point in every environment.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
 
-User.create!({
-  email: "nick@miniware.team",
-  handle: "nickisnoble"
-})
+User.find_or_create_by(email: "nick@miniware.team") do |user|
+  user.handle = "nickisnoble"
+end
 
-[
-  "https://kinopio.club/",
-  "https://audiopen.ai/",
-  "https://rubyonrails.org/"
-].each do |link|
-  Listing.create!(
-    link: link,
-    user: User.first
-  ) # Images don't populate for some reason, but other meta things do.
+Listing.find_or_create_by(link: "https://rubyonrails.org/") do |listing|
+  listing.user = User.first
 end

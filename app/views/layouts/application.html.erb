@@ -1,8 +1,33 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Organic Software Directory</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <%# TODO: These should be per page %>
+    <% title = "Organic Software Directory" %>
+    <% description = "Discover, share, and discuss sustainable software products." %>
+    <% url = "https://built.organic" %>
+
+    <title><%= title %></title>
+
+    <meta name="description" content="<%= description %>">
+
+    <!-- Facebook Meta Tags -->
+    <meta property="og:url" content="<%= url %>">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="<%= title %>">
+    <meta property="og:description" content="<%= description %>">
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="<%= url.split('//')[1] %>">
+    <meta property="twitter:url" content="<%= url %>">
+    <meta name="twitter:title" content="<%= title %>">
+    <meta name="twitter:description" content="<%= description %>">
+
+
+    <link rel="manifest" href="/manifest.webmanifest">
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>

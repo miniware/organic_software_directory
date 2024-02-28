@@ -27,6 +27,10 @@
         <span>•</span>
         <%= link_to listing.comments.count > 0 ? "#{listing.comments.count} comments" : "Start the conversation!", listing_path(listing), class: "font-medium hover:underline" %>
       <% end %>
+      <% if listing.user == current_user %>
+        <span>•</span>
+        <%= link_to "Edit", edit_listing_path(listing), class: "font-medium hover:underline" %>
+      <% end %>
     </footer>
   </div>
 </article>

@@ -15,4 +15,8 @@ class User < ApplicationRecord
 
   normalizes :handle, :email,
     with: ->(text) { text.strip.downcase }
+
+  def to_param
+    handle
+  end
 end

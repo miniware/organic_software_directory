@@ -18,9 +18,8 @@ gem "passwordless", "~> 1.4"
 
 gem "sqlite3", "~> 1.4"
 
-
-gem "resend", "~> 0.10.0"
 group :production do
+  gem "resend", "~> 0.10.0"
 end
 
 group :development, :test do

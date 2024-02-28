@@ -10,9 +10,9 @@ servers:
     hosts:
       - 138.197.108.70
     labels:
-      traefik.http.routers.entrypoints: websecure
-      traefik.http.routers.rule: Host(`built.organic`)
-      traefik.http.routers.tls.certresolver: letsencrypt
+      traefik.http.routers.organic_software_directory.entrypoints: websecure
+      traefik.http.routers.organic_software_directory.rule: Host(`built.organic`)
+      traefik.http.routers.organic_software_directory.tls.certresolver: letsencrypt
 ssh:
   user: root
 
@@ -73,7 +73,7 @@ traefik:
     entryPoints.web.http.redirections.entryPoint.to: websecure # We want to force https
     entryPoints.web.http.redirections.entryPoint.scheme: https
     entryPoints.web.http.redirections.entrypoint.permanent: true
-    certificatesResolvers.letsencrypt.acme.email: "nick@miniware.team"
+    certificatesResolvers.letsencrypt.acme.email: "donotspam@miniware.team"
     certificatesResolvers.letsencrypt.acme.storage: "/letsencrypt/acme.json" # Must match the path in `volume`
     certificatesResolvers.letsencrypt.acme.httpchallenge: true
     certificatesResolvers.letsencrypt.acme.httpchallenge.entrypoint: web # Must match the role in `servers`

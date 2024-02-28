@@ -5,7 +5,10 @@ class CommentsController < ApplicationController
     @comment = @commentable.comments.new(comment_params)
     @comment.user = current_user
     if @comment.save
-      render turbo_stream: turbo_stream.prepend(comment_section_id, partial: "comments/comment", locals: {comment: @comment})
+      render turbo_stream: [
+        turbo_stream.prepend(comment_section_id, partial: "comments/comment", locals: {comment: @comment}),
+        turbo_stream.replace("new_comment_form", partial: "comments/form", locals: {comment: @commentable.comments.build})
+      ]
     else
       render turbo_stream: turbo_stream.replace(@comment, partial: "comments/form", locals: {comment: @comment})
     end

@@ -1,4 +1,4 @@
-<footer class="p-4 flex justify-between items-end mt-auto">
+<footer class="p-4 flex justify-between items-end mt-auto pt-20">
   <%= link_to "https://miniware.team?utm_source=organic%20software%20directory", target: "_blank", rel: "noopener noreferrer" do %>
     <svg viewBox="0 0 169 53" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-6 group">
       <g class="fill-black/10 dark:fill-white/10 group-hover:fill-black transition-all duration-300">
@@ -24,5 +24,9 @@
       </g>
     </svg>
   <% end %>
-  <%= link_to "Privacy Policy", "https://miniware.team/terms/privacy", class: "opacity-50 hover:underline" %>
+
+  <nav class="flex gap-3 opacity-50 leading-none">
+    <%= link_to "Privacy", "https://miniware.team/terms/privacy", class: "hover:underline" %>
+    <%= link_to "Github", "https://github.com/miniware/organic_software_directory/discussions", class: "hover:underline" %>
+  </nav>
 </footer>

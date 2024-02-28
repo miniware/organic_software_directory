@@ -1,4 +1,21 @@
-
+<details open>
+  <summary class="font-bold text-lg mb-2">What is organic software?</summary>
+  <div class="p-4 flex flex-col gap-4 border rounded border-white/10">
+    <p>The term was coined by @pketh in 2023 in their blog post <%= link_to "“In Search of Organic Software”", "https://pketh.org/organic-software.html", target: "_blank", rel: "noopener noreferrer", class: "underline hover:underline-offset-2" %>. TL;DR<sup>1</sup>: Businesses change when they take VC money.</p>
+    <p>Certainly, there were already terms like "Indie" and "Bootstrapped", but what do they really mean? The "organic" label for software means something specific:</p>
+    <h3 class="text-xl italic mt-2 -mb-2">Organic Software is software that...</h3>
+    <ol class="list-decimal pl-4 space-y-1">
+      <li>Has no external pressure (eg. from funding sources) to chase funding rounds, grow unsustainably, or to get acquired<sup>2</sup></li>
+      <li>Has a clear pricing page, discloses their sources of funding, and sources of revenue</li>
+      <li>Doesn't make majority revenue from selling user data to third parties<sup>3</sup></li>
+    </ol>
+    <ul class="*:text-xs mt-2">
+      <li><sup>1</sup> no really, you should read it. It's a good article!</li>
+      <li><sup>2</sup> bootstrapping, crowdfunding, grants, and angel investment are okay</li>
+      <li><sup>3</sup> added from the original by this site</li>
+    </ul>
+  </div>
+</details>
 <% if current_user %>
   <div id="new-listing-form">
     <%= form_with model: @new_listing, local: true do | form | %>
@@ -11,7 +28,6 @@
 <% else %>
   <%= link_to "Sign in to list products!", auth_sign_in_path, class: "font-bold hover:underline" %>
 <% end %>
-
 <ol class="flex flex-col gap-8">
-  <%= render @listings %>
+  <%= render @listings.order(created_at: :desc) %>
 </ol>

@@ -19,14 +19,26 @@ class Listing < ApplicationRecord
     page = MetaInspector.new(link)
     self.title ||= page.best_title
     self.description ||= page.best_description
-    self.icon ||= find_apple_touch_icon(page) || page.images.favicon
-    self.cover ||= page.images.best
+    self.icon = find_apple_touch_icon(page) || page.images.favicon if icon.blank?
+    self.cover = page.images.best if cover.blank?
   rescue => e
     Rails.logger.error "MetaInspector failed for #{link}: #{e.message}"
   end
 
   def find_apple_touch_icon(page)
-    page.images.all.find { |l| l.include?('rel="apple-touch-icon"') }
+    link_element = page.parsed.css('link[rel="apple-touch-icon"]').first
+    if link_element
+      href = link_element["href"]
+      # Check if the href is a full URL
+      if URI.parse(href).host.nil?
+        # If not, join it with the page's base URL
+        href = URI.join(page.url, href).to_s
+      end
+      href
+    end
+  rescue => e
+    Rails.logger.error "Failed to find apple-touch-icon for #{page.url}: #{e.message}"
+    nil
   end
 
   def not_posted_recently

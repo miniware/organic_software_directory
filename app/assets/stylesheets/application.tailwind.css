@@ -3,6 +3,19 @@
 @tailwind utilities;
 
 @layer base {
+  * {
+    font-optical-sizing: auto;
+    font-variation-settings: "opsz" 8;
+  }
+
+  .text-lg,
+  .text-xl,
+  .text-2xl,
+  .text-3xl,
+  .text-4xl {
+    font-variation-settings: "opsz" 12;
+  }
+
   label {
     @apply block text-sm;
     font-variation-settings: "opsz" 8;
@@ -15,7 +28,9 @@
 }
 
 @layer components {
-  .field, .input, .textarea {
+  .field,
+  .input,
+  .textarea {
     @apply w-full;
   }
 

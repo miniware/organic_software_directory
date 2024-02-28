@@ -2,7 +2,7 @@ class ListingsController < ApplicationController
   before_action :require_user!, except: [:index, :show]
 
   def show
-    @listing = Listing.includes(comments: [:comments]).find(params[:id])
+    @listing = Listing.includes(comments: [:comments]).find_by!(slug: params[:id])
   end
 
   def index
@@ -22,11 +22,11 @@ class ListingsController < ApplicationController
   end
 
   def edit
-    @listing = Listing.find(params[:id])
+    @listing = Listing.find_by!(slug: params[:id])
   end
 
   def update
-    @listing = Listing.find(params[:id])
+    @listing = Listing.find_by!(slug: params[:id])
     if @listing.update(listing_params)
       redirect_to @listing, notice: "Listing was successfully updated."
     else

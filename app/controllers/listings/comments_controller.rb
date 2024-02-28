@@ -4,6 +4,6 @@ class Listings::CommentsController < CommentsController
   private
 
   def set_commentable
-    @commentable = Listing.find(params[:listing_id])
+    @commentable = Listing.find_by!(slug: params[:listing_id])
   end
 end

@@ -2,7 +2,9 @@ class Listing < ApplicationRecord
   belongs_to :user
   has_many :comments, as: :commentable, dependent: :destroy
 
+  before_save :generate_slug
   before_validation :fill_in_details_from_og_meta_tags
+
   validate :not_posted_recently, on: :create
 
   validates :link, presence: true,
@@ -11,9 +13,17 @@ class Listing < ApplicationRecord
   validates :icon, :cover,
     format: {with: URI::DEFAULT_PARSER.make_regexp, message: "must be a valid URL", allow_blank: true}
 
-  validates :title, presence: true
+  validates :title, presence: true, uniqueness: {case_sensitive: false}
+
+  def to_param
+    slug
+  end
 
   private
+
+  def generate_slug
+    self.slug = title.parameterize if title_changed? || slug.blank?
+  end
 
   def fill_in_details_from_og_meta_tags
     page = MetaInspector.new(link)

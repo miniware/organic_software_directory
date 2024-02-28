@@ -18,6 +18,11 @@ gem "passwordless", "~> 1.4"
 
 gem "sqlite3", "~> 1.4"
 
+
+gem "resend", "~> 0.10.0"
+group :production do
+end
+
 group :development, :test do
   gem "debug", platforms: %i[mri windows]
 end
@@ -33,5 +38,3 @@ group :test do
   gem "vcr", "~> 6.2"
   gem "webmock", "~> 3.22"
 end
-
-gem "postmark-rails", "~> 0.22.1"

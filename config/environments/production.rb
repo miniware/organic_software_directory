@@ -75,8 +75,7 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "organic_software_directory_production"
 
   config.action_mailer.perform_caching = false
-  config.action_mailer.delivery_method = :postmark
-  config.action_mailer.postmark_settings = {api_token: Rails.application.credentials.postmark_api_token}
+  config.action_mailer.delivery_method = :resend
 
   # Set default host for URL helpers
   config.action_mailer.default_url_options = {host: "https://built.organic"}

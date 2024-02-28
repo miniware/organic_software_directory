@@ -1,25 +1,23 @@
 <%= form_with model: @listing, local: true do |form| %>
-  <div class="flex gap-4 text-sm">
-    <div class="field-group flex flex-col gap-4">
-      <div class="field">
-        <%= render "icon", listing: @listing %>
+  <div class="flex flex-col gap-4 max-w-screen-sm">
+    <div class="field flex gap-2">
+      <%= render "icon", listing: @listing %>
+      <div class="flex-1">
         <%= form.label :icon %>
-        <%= form.text_field :icon, class: "input" %>
+        <%= form.text_field :icon, class: "input text-xs p-1" %>
       </div>
     </div>
-    <div class="flex-1 flex flex-col gap-4">
-      <div class="field">
-        <%= form.label :title %>
-        <%= form.text_field :title, required: true, class: "input text-xl" %>
-      </div>
-      <div class="field">
-        <%= form.label :description %>
-        <%= form.text_area :description, rows: 2, class: "textarea" %>
-      </div>
-      <div class="actions float-right">
-        <%= form.submit class: "button is-link" %>
-        <%= @listing.errors.full_messages.to_sentence if @listing.errors.any? %>
-      </div>
+    <div class="field">
+      <%= form.label :title %>
+      <%= form.text_field :title, required: true, class: "input text-2xl" %>
+    </div>
+    <div class="field">
+      <%= form.label :description %>
+      <%= form.text_area :description, rows: 2, class: "textarea text-lg" %>
+    </div>
+    <div class="actions float-right">
+      <%= form.submit class: "button is-link" %>
+      <%= @listing.errors.full_messages.to_sentence if @listing.errors.any? %>
     </div>
   </div>
 <% end %>

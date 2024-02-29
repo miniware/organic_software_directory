@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_28_210951) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_29_191215) do
   create_table "comments", force: :cascade do |t|
     t.string "commentable_type", null: false
     t.integer "commentable_id", null: false
@@ -60,6 +60,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_28_210951) do
     t.index ["handle"], name: "index_users_on_handle", unique: true
   end
 
+  create_table "votes", force: :cascade do |t|
+    t.string "votable_type", null: false
+    t.integer "votable_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "votable_type", "votable_id"], name: "index_votes_on_user_and_votable_uniqueness", unique: true
+    t.index ["user_id"], name: "index_votes_on_user_id"
+    t.index ["votable_type", "votable_id"], name: "index_votes_on_votable"
+  end
+
   add_foreign_key "comments", "users"
   add_foreign_key "listings", "users"
+  add_foreign_key "votes", "users"
 end

@@ -11,7 +11,7 @@
     <% end %>
 
     <ol class="flex flex-col gap-4" id="<%= dom_id(@listing, :comments_for) %>" data-controller="reply">
-      <%= render @listing.comments.order(created_at: :desc) %>
+      <%= render @listing.comments.popular %>
     </ol>
   </div>
 </div>

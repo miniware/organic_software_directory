@@ -3,17 +3,20 @@ Rails.application.routes.draw do
 
   passwordless_for :users, at: "/", as: :auth
 
+  concern :votable do
+    resource :vote, only: [:create, :destroy]
+  end
+
+  concern :commentable do
+    resources :comments, only: :create, module: :comments
+  end
+
   get "/@:id", to: "users#show", as: :user
   get "/@:id/settings", to: "users#edit", as: :edit_user
   resources :users, only: [:new, :create, :update]
 
-  resources :listings, except: [:new, :destroy, :index] do
-    resources :comments, only: :create, module: :listings
-  end
-
-  resources :comments, except: [:create, :index] do
-    resources :comments, only: :create, module: :comments
-  end
+  resources :listings, concerns: [:votable, :commentable], except: [:new, :destroy, :index]
+  resources :comments, concerns: [:votable, :commentable], except: [:create, :index]
 
   root "listings#index"
 end

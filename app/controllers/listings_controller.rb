@@ -7,7 +7,7 @@ class ListingsController < ApplicationController
 
   def index
     @new_listing = Listing.new
-    @listings = Listing.all
+    @listings = Listing.popular
   end
 
   def create

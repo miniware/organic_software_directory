@@ -1,0 +1,25 @@
+<%= turbo_frame_tag dom_id(votable, :vote) do %>
+  <% user_vote = votable.votes.find_by(user: current_user) if current_user %>
+  <% has_voted = !!user_vote.present? %>
+  <% total_votes = votable.votes.count %>
+
+  <% vote_display = capture do %>
+    <%# HACKY %>
+    <div class="flex text-center text-sm leading-none rounded items-center gap-x-1 p-0.5 hover:bg-black/20 dark:hover:bg-white/20 <%= "bg-black/10 dark:bg-white/10 flex-col" unless votable.class.name == "Comment" %>">
+      <span><%= has_voted ? "✦" : "✧" %></span>
+      <span class="[font-variant-numeric:lining-nums] truncate"><%= total_votes %></span>
+    </div>
+  <% end %>
+
+  <div class="vote-button">
+    <% if current_user %>
+      <% if has_voted %>
+        <%= button_to vote_display, vote_path_for(votable, user_vote), class: "w-full", method: :delete, data: { turbo_method: :delete } %>
+      <% else %>
+        <%= button_to vote_display, vote_path_for(votable), class: "w-full" %>
+      <% end %>
+    <% else %>
+      <%= vote_display %>
+    <% end %>
+  </div>
+<% end %>

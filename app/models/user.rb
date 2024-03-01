@@ -4,6 +4,17 @@ class User < ApplicationRecord
 
   enum role: %w[member admin].index_by(&:itself)
 
+  has_one :accepted_invite, class_name: "Invite", foreign_key: "accepted_by_id"
+  has_many :invites, foreign_key: "sent_by_id" do
+    def remaining
+      if proxy_association.owner.admin?
+        Float::INFINITY # unlimited
+      else
+        [3 - proxy_association.owner.invites.count, 0].max
+      end
+    end
+  end
+
   passwordless_with :email
   validates :email,
     presence: true,

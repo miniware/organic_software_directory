@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_29_191215) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_01_191453) do
   create_table "comments", force: :cascade do |t|
     t.string "commentable_type", null: false
     t.integer "commentable_id", null: false
@@ -20,6 +20,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_29_191215) do
     t.datetime "updated_at", null: false
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "invites", force: :cascade do |t|
+    t.integer "sent_by_id", null: false
+    t.integer "accepted_by_id"
+    t.string "recipient_email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["accepted_by_id"], name: "index_invites_on_accepted_by_id"
+    t.index ["recipient_email"], name: "index_invites_on_recipient_email", unique: true
+    t.index ["sent_by_id"], name: "index_invites_on_sent_by_id"
   end
 
   create_table "listings", force: :cascade do |t|
@@ -56,6 +67,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_29_191215) do
     t.text "bio"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "role", default: "member"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["handle"], name: "index_users_on_handle", unique: true
   end
@@ -72,6 +84,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_29_191215) do
   end
 
   add_foreign_key "comments", "users"
+  add_foreign_key "invites", "users", column: "accepted_by_id"
+  add_foreign_key "invites", "users", column: "sent_by_id"
   add_foreign_key "listings", "users"
   add_foreign_key "votes", "users"
 end

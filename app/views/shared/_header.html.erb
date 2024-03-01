@@ -8,9 +8,9 @@
   </h1>
 
   <% if current_user %>
-    <nav class="flex gap-2 items-baseline">
-      <%= link_to "You have #{current_user.invites.remaining} invites", "#" %>
+    <nav class="flex max-md:flex-col gap-2 items-end md:items-baseline">
       <%= link_to "@" + current_user.handle, current_user, class: "button" %>
+      <%= link_to "You have #{pluralize(current_user.invites.remaining, 'invite')}!", invites_path, class: "opacity-50 text-sm hover:underline md:-order-1" if (current_user.invites.remaining > 0) %>
     </nav>
   <% else %>
     <%= link_to "Login", auth_sign_in_path, class: "button" %>

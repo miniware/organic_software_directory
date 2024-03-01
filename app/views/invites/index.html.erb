@@ -1,0 +1,27 @@
+<h2 class="text-3xl text-center">Culture is shaped by the individuals around us.</h2>
+<div class="max-w-[400px] mx-auto flex flex-col gap-12">
+  <article class="flex flex-col gap-4">
+    <p>Our hope is that by growing slowly and intentionally, OSD will become something truly special.</p>
+    <p>Please invite people who love to build, and see others building. People from far away, or with other backgrounds. People who are nice.</p>
+    <p>People like you.</p>
+  </article>
+  <%= link_to "Invite someone to OSD", new_invite_path, class: "button self-center" %>
+  <% if current_user.invites.any? %>
+    <aside class="flex flex-col gap-4 text-center">
+      <h3 class="text-xl">You've invited:</h3>
+      <ul>
+        <% @invites.each do |invite| %>
+          <% if invite.persisted? %>
+            <li>
+              <% if invite.accepted? %>
+                <%= profile_link_for invite.accepted_by %>
+              <% else %>
+                <code class="inline-block px-px bg-black/10 text-sm"><%= invite.recipient_email %></code> <%= time_ago_in_words(invite.created_at) %> ago.
+              <% end %>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+    </aside>
+  <% end %>
+</div>

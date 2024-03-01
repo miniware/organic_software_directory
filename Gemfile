@@ -15,7 +15,7 @@ gem "bootsnap", require: false
 gem "tailwindcss-rails"
 gem "metainspector", "~> 5.15"
 gem "passwordless", "~> 1.4"
-
+gem "bcrypt", "~> 3.1"
 gem "sqlite3", "~> 1.4"
 
 group :production do
@@ -29,6 +29,7 @@ end
 group :development do
   gem "web-console"
   gem "letter_opener", "~> 1.9"
+  gem "rails_live_reload", "~> 0.3.5"
 end
 
 group :test do

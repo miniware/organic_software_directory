@@ -13,6 +13,10 @@ class User < ApplicationRecord
         [3 - proxy_association.owner.invites.count, 0].max
       end
     end
+
+    def remaining?
+      remaining > 0
+    end
   end
 
   passwordless_with :email

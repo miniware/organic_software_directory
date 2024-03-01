@@ -2,6 +2,8 @@ class User < ApplicationRecord
   has_many :listings
   has_many :comments
 
+  enum role: %w[member admin].index_by(&:itself)
+
   passwordless_with :email
   validates :email,
     presence: true,

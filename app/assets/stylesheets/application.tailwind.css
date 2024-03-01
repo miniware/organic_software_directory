@@ -6,6 +6,7 @@
   * {
     font-optical-sizing: auto;
     font-variation-settings: "opsz" 8;
+    font-variant-numeric: lining-nums;
   }
 
   .text-lg,
@@ -68,6 +69,7 @@
 
     & .input {
       all: unset;
+      font: inherit;
       @apply flex-1;
 
       &::placeholder {
@@ -80,8 +82,8 @@
     }
   }
 
-  .comment .comment blockquote {
-    @apply pt-1;
+  .comment .comment {
+    @apply mt-2;
   }
 }
 

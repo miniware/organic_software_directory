@@ -1,15 +1,13 @@
 <% unless comment.new_record? # don't render the new comment from the form %>
   <%= turbo_frame_tag dom_id(comment) do %>
     <% username = current_user && current_user == comment.user ? "You" : "@" + comment.user.handle %>
-
-    <li class="comment flex flex-col gap-1">
-      <blockquote class="border-l pl-2 ml-1.5 flex flex-col gap-1 border-orange-300 dark:border-white/20">
+    <li class="comment flex flex-col gap-2 border-l pl-2 border-orange-300 dark:border-white/10">
+      <blockquote class="flex flex-col gap-1">
         <h4 class="text-xs opacity-50"><%= link_to username, comment.user, class: "font-bold hover:underline" %> posted <%= time_ago_in_words(comment.created_at) %> ago.</h4>
         <p class="font-serif text-lg [white-space:pre-wrap]"><%= comment.body %></p>
       </blockquote>
-
       <% if current_user %>
-        <nav class="flex gap-2 text-xs opacity-50 items-baseline">
+        <nav class="flex gap-2 text-xs opacity-40 items-baseline">
           <%= render "votes/vote", votable: comment %>
           <%= link_to "Reply", "#", class: "hover:underline", data: {
             action: "click->reply#new",
@@ -18,12 +16,10 @@
           <%= button_to "Delete", comment_path(comment), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "hover:underline" if current_user == comment.user %>
         </nav>
       <% end %>
-
       <%= content_tag :template, id: dom_id(comment, :reply_form) do %>
         <%= render "comments/form", comment: comment.comments.build %>
       <% end %>
-
-      <ol class="pl-4 mt-1" id="<%= dom_id(comment, :comments_for) %>">
+      <ol id="<%= dom_id(comment, :comments_for) %>">
         <%= render partial: "comments/comment", collection: comment.comments.popular, as: :comment %>
       </ol>
     </li>

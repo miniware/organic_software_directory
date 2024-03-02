@@ -2,7 +2,6 @@ class InvitesController < ApplicationController
   before_action :require_user!, except: :show
 
   def index
-    @new_invite = current_user.invites.new if current_user.invites.remaining?
     @invites = current_user.invites
   end
 
@@ -12,11 +11,13 @@ class InvitesController < ApplicationController
 
   def create
     @invite = current_user.invites.new(invite_params)
-    @code = @invite.generate_token_for(:invite_code)
+    @message = params[:message]
 
     if @invite.save
+      InviteMailer.send_invite(@invite, @message).deliver_now
+      redirect_to invites_path
     else
-      render "index", status: :unprocessable_entity
+      render :new, status: :unprocessable_entity
     end
   end
 

@@ -1,0 +1,14 @@
+Hey!
+
+You've been invited to post on The Organic Software Directory.
+
+<% if @message.present? %>
+<%= @message %>
+<% end %>
+
+
+Use this special link to setup your account:
+<%= accept_invite_url(@invite.code) %>
+
+Love,
+OSD 🤖 and @<%= @invite.sent_by.handle %>

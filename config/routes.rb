@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   get "/@:id/settings", to: "users#edit", as: :edit_user
   resources :users, only: [:update]
 
-  get "/invites/:token/accept", to: "invites#show", as: :invite
+  get "/invites/:token/accept", to: "invites#show", as: :accept_invite
   resources :invites, only: [:index, :new, :create]
 
   resources :listings, concerns: [:votable, :commentable], except: [:new, :destroy, :index]

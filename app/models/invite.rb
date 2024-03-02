@@ -9,7 +9,7 @@ class Invite < ApplicationRecord
   normalizes :recipient_email, with: ->(email) { email.strip.downcase }
   validates :recipient_email,
     presence: true,
-    uniqueness: true,
+    uniqueness: {message: "already invited"},
     format: {with: URI::MailTo::EMAIL_REGEXP}
 
   validate :recipient_is_not_user
@@ -17,6 +17,10 @@ class Invite < ApplicationRecord
 
   def accepted?
     accepted_by.present?
+  end
+
+  def code
+    generate_token_for(:invite_code)
   end
 
   private

@@ -1,0 +1,11 @@
+<p>Hey!</p>
+
+<p>You've been invited to post on The Organic Software Directory.</p>
+
+<% if @message.present? %>
+<p><%= @message %></p>
+<% end %>
+
+<p><%= link_to "Click here to setup your account", accept_invite_url(@invite.code) %></p>
+
+<p>Love,<br>OSD 🤖 and @<%= @invite.sent_by.handle %></p>

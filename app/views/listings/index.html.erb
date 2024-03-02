@@ -1,6 +1,6 @@
 <details <%= "open" unless current_user %>>
   <summary class="font-bold text-lg mb-2">What is organic software?</summary>
-  <div class="p-4 flex flex-col gap-4 border rounded border-white/10">
+  <div class="p-4 flex flex-col gap-4 border rounded border-black/10 dark:border-white/10">
     <p>The term was coined by @pketh in 2023 in his blog post <%= link_to "“In Search of Organic Software”", "https://pketh.org/organic-software.html", target: "_blank", rel: "noopener noreferrer", class: "underline hover:underline-offset-2" %>. TL;DR<sup>1</sup>: Businesses change when they take VC money.</p>
     <p>Certainly, there were already terms like "Indie" and "Bootstrapped", but what do they really mean? The "organic" label for software means something specific:</p>
     <h3 class="text-xl italic mt-2 -mb-2">Organic Software is software that...</h3>
@@ -19,9 +19,10 @@
 <% if current_user %>
   <div id="new-listing-form">
     <%= form_with model: @new_listing, local: true do | form | %>
-      <%= form.label :link, "List a Product!", class: "font-display tracking-wide text-orange-500" %>
-      <%= form.url_field :link, class: "input",
-          placeholder: "Paste a link and hit enter...", required: true %>
+      <%= form.label :link, "List a Product!", class: "font-display tracking-wide text-orange-800 dark:text-orange-500" %>
+      <%= form.url_field :link, class: "input placeholder:text-orange-950/50",
+          placeholder: "Paste a link and hit enter...",
+          required: true %>
       <%= form.submit "Add Product", class: "sr-only" %>
     <% end %>
   </div>

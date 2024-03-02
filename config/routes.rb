@@ -7,10 +7,6 @@ Rails.application.routes.draw do
     resource :vote, only: [:create, :destroy]
   end
 
-  concern :commentable do
-    resources :comments, only: :create, module: :comments
-  end
-
   get "/@:id", to: "users#show", as: :user
   get "/@:id/settings", to: "users#edit", as: :edit_user
   patch "/@:id", to: "users#update", as: :update_user
@@ -19,8 +15,14 @@ Rails.application.routes.draw do
   get "/invites/:token/accept", to: "invites#accept", as: :accept_invite
   resources :invites, only: [:index, :new, :create]
 
-  resources :listings, concerns: [:votable, :commentable], except: [:new, :destroy, :index]
-  resources :comments, concerns: [:votable, :commentable], except: [:create, :index]
+  resources :listings, concerns: :votable, except: [:new, :destroy, :index] do
+    resources :comments, only: :create, module: :listings
+  end
+
+  resources :comments, concerns: :votable, except: [:create, :index] do
+    resources :comments, only: :create, module: :comments
+  end
+
 
   root "listings#index"
 end

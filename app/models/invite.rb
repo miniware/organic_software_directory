@@ -12,8 +12,8 @@ class Invite < ApplicationRecord
     uniqueness: {message: "already invited"},
     format: {with: URI::MailTo::EMAIL_REGEXP}
 
-  validate :recipient_is_not_user
-  validate :sender_has_remaining_invites
+  validate :recipient_is_not_user, on: :create
+  validate :sender_has_remaining_invites, on: :create
 
   def accepted?
     accepted_by.present?

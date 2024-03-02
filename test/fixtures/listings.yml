@@ -1,19 +1,19 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+ror:
   title: Ruby on Rails
   slug: ruby-on-rails
   description: A web-app framework that includes everything needed to create database-backed web applications according to the Model-View-Controller (MVC) pattern.
   link: https://rubyonrails.org/
   icon: https://rubyonrails.org/assets/images/favicon.png
   cover: https://rubyonrails.org/assets/images/opengraph.png
-  user: one
+  user: kermit
 
-two:
+kinopio:
   title: Kinopio – Thinking Canvas
   slug: kinopio-thinking-canvas
   description: Create spaces to mindmap, moodboard, research, whiteboard, brainstorm, plan, and take notes
   link: https://kinopio.club/
   icon: https://kinopio.club/apple-touch-icon.png
   cover: nil
-  user: two
+  user: mspiggy

@@ -1,9 +1,8 @@
 <% unless comment.new_record? # don't render the new comment from the form %>
   <%= turbo_frame_tag dom_id(comment) do %>
-    <% username = current_user && current_user == comment.user ? "You" : "@" + comment.user.handle %>
     <li class="comment flex flex-col gap-2 border-l pl-2 border-orange-300 dark:border-white/10">
       <blockquote class="flex flex-col gap-1">
-        <h4 class="text-xs opacity-50"><%= link_to username, comment.user, class: "font-bold hover:underline" %> posted <%= time_ago_in_words(comment.created_at) %> ago.</h4>
+        <h4 class="text-xs opacity-50"><%= profile_link_for comment.user %> posted <%= time_ago_in_words(comment.created_at) %> ago.</h4>
         <p class="font-serif text-lg [white-space:pre-wrap]"><%= comment.body %></p>
       </blockquote>
       <% if current_user %>

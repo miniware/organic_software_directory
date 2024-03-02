@@ -1,0 +1,39 @@
+<h2 class="text-3xl text-center">Invite someone to OSD!</h2>
+
+<%= form_with model: @invite do |form| %>
+  <div class="mx-auto max-w-[40ch] font-sans rounded overflow-hidden border shadow-md bg-white text-neutral-950 border-neutral-300 dark:bg-neutral-900 dark:text-neutral-300 dark:border-neutral-800">
+    <header class="grid grid-cols-4 border-inherit">
+      <div class="grid grid-cols-subgrid items-center col-span-full border-b border-inherit p-1">
+        <%= form.label :recipient_email, "To:", class: "font-mono text-xs opacity-40" %>
+        <%= form.email_field :recipient_email, required: true, placeholder: "friend@example.com",
+          class: "col-span-3 font-bold text-xs p-0 bg-transparent border-none focus:ring-0 placeholder:text-neutral-500" %>
+      </div>
+      <div class="grid grid-cols-subgrid items-baseline col-span-full border-b border-inherit p-1 cursor-not-allowed text-xs">
+        <span class="font-mono opacity-40">From:</span>
+        <p class="col-span-3 opacity-40">bot@built.organic</p>
+      </div>
+      <div class="grid grid-cols-subgrid items-baseline col-span-full border-b border-inherit p-1 cursor-not-allowed text-xs">
+        <span class="font-mono opacity-40">Subject:</span>
+        <p class="col-span-3 opacity-40">Invitation to The Organic Software Directory</p>
+      </div>
+    </header>
+
+    <div class="flex flex-col gap-4 px-2 py-4 whitespace-pre-line dark:font-light cursor-not-allowed">
+      <p>Hey!</p>
+
+      <p>You've been invited to post on The Organic Software Directory.</p>
+
+      <textarea name="message" placeholder="Add a personal message?" class="w-full p-0 bg-transparent border-none resize-none focus:ring-0 placeholder:italic placeholder:text-neutral-500"></textarea>
+
+      <%= link_to "Click here to setup your account", "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+          target: "_blank", class: "text-blue-500 hover:text-blue-600 underline" %>
+
+      <p>Love,<br>OSD 🤖 and @<%= current_user.handle %></p>
+    </div>
+
+    <%= form.submit "Send invite", class: "w-full cursor-pointer p-2 font-medium text-white border-t border-blue-500 bg-gradient-to-b from-blue-500 to-blue-800 hover:from-blue-700 hover:to-blue-800 active:to-blue-600" %>
+  </div>
+  <% if @invite.errors.any? %>
+    <p class="italic text-center"><%= @invite.errors.full_messages.to_sentence %></p>
+  <% end %>
+<% end %>

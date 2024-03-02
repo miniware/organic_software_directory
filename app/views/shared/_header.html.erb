@@ -1,5 +1,5 @@
 <header class="p-4 flex justify-between items-start">
-  <h1 class="font-display text-lg" aria-label="Organic Software Directory">
+  <h1 class="font-display text-lg text-orange-800 dark:text-inherit" aria-label="Organic Software Directory">
     <%= link_to root_url, class: "contents" do %>
       <span class="max-md:block max-md:leading-none">Organic</span>
       <span class="max-md:block max-md:leading-none">Software</span>
@@ -8,7 +8,10 @@
   </h1>
 
   <% if current_user %>
-    <%= link_to "@" + current_user.handle, current_user, class: "button" %>
+    <nav class="flex max-md:flex-col gap-2 items-end md:items-baseline">
+      <%= link_to "@" + current_user.handle, current_user, class: "button" %>
+      <%= link_to "You have #{pluralize(current_user.invites.remaining, 'invite')}!", invites_path, class: "opacity-50 text-sm hover:underline md:-order-1" if (current_user.invites.remaining > 0) %>
+    </nav>
   <% else %>
     <%= link_to "Login", auth_sign_in_path, class: "button" %>
   <% end %>

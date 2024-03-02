@@ -22,7 +22,7 @@
     </header>
     <footer class="flex max-md:flex-col md:gap-2 text-sm opacity-50">
       <%= render "votes/vote", votable: listing %>
-      <p>Posted <%= time_ago_in_words(listing.created_at) %> ago by <%= link_to "@#{listing.user.handle}", listing.user, class: "hover:underline" %></p>
+      <p>Posted <%= time_ago_in_words(listing.created_at) %> ago by <%= profile_link_for listing.user %></p>
       <% unless is_listing_show %>
         <span class="max-md:hidden">•</span>
         <%= link_to listing.comments.count > 0 ? "#{listing.comments.count} comments" : "Start the conversation!", listing_path(listing), class: "font-medium hover:underline" %>

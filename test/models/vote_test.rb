@@ -2,8 +2,8 @@ require "test_helper"
 
 class VoteTest < ActiveSupport::TestCase
   def setup
-    @user = users(:one)
-    @comment = comments(:one)
+    @user = users(:kermit)
+    @comment = comments(:rainbows)
     @vote = Vote.new(user: @user, votable: @comment)
   end
 

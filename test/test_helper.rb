@@ -1,8 +1,12 @@
 ENV["RAILS_ENV"] ||= "test"
 require_relative "../config/environment"
 require "rails/test_help"
-require "passwordless/test_helpers" # TODO: This isn't actually working
 require "vcr"
+
+require "passwordless/test_helpers" # TODO: This isn't actually working
+if defined?(ActionDispatch::IntegrationTest)
+  ActionDispatch::IntegrationTest.send(:include, ::Passwordless::TestHelpers::RequestTestCase)
+end
 
 VCR.configure do |config|
   config.cassette_library_dir = "test/vcr_cassettes"

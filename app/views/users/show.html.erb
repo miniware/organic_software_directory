@@ -10,10 +10,10 @@
     </nav>
   <% end %>
 
-  <%= if user.listings.any? %>
-  <div class="flex flex-col gap-4">
-    <h3 class="text-xl border-b border-black/30">Gathered</h3>
-    <%= render @user.listings %>
-  </div>
+  <% if @user.listings.any? %>
+    <div class="flex flex-col gap-4">
+      <h3 class="text-xl border-b border-black/30">Gathered</h3>
+      <%= render @user.listings %>
+    </div>
   <% end %>
 </div>

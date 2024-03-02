@@ -25,7 +25,8 @@
       <p>Posted <%= time_ago_in_words(listing.created_at) %> ago by <%= profile_link_for listing.user %></p>
       <% unless is_listing_show %>
         <span class="max-md:hidden">•</span>
-        <%= link_to listing.comments.count > 0 ? "#{listing.comments.count} comments" : "Start the conversation!", listing_path(listing), class: "font-medium hover:underline" %>
+        <% comments_label = !listing.comments.any? ? "Start the conversation!" : pluralize(listing.total_comments, 'comment')  %>
+        <%= link_to comments_label, listing_path(listing), class: "font-medium hover:underline" %>
       <% end %>
       <% if listing.user == current_user %>
         <span class="max-md:hidden">•</span>

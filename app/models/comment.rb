@@ -1,5 +1,6 @@
 class Comment < ApplicationRecord
   include Votable
+  include TotalComments
 
   belongs_to :user
   belongs_to :commentable, polymorphic: true

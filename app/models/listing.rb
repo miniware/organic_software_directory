@@ -2,21 +2,18 @@ class Listing < ApplicationRecord
   include Votable
   include TotalComments
 
+  scope :recent, -> { order(created_at: :desc) }
+
   belongs_to :user
   has_many :comments, as: :commentable, dependent: :destroy
 
   before_save :generate_slug
   before_validation :fill_in_details_from_og_meta_tags
 
-  validate :not_posted_recently, on: :create
-
-  validates :link, presence: true,
-    format: {with: URI::DEFAULT_PARSER.make_regexp, message: "must be a valid URL"}
-
-  validates :icon, :cover,
-    format: {with: URI::DEFAULT_PARSER.make_regexp, message: "must be a valid URL", allow_blank: true}
-
+  validates :link, presence: true, format: {with: URI::DEFAULT_PARSER.make_regexp, message: "must be a valid URL"}
+  validates :icon, :cover, format: {with: URI::DEFAULT_PARSER.make_regexp, message: "must be a valid URL", allow_blank: true}
   validates :title, presence: true, uniqueness: {case_sensitive: false}
+  validate :not_posted_recently, on: :create
 
   def to_param
     slug

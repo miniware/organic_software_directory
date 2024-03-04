@@ -29,6 +29,11 @@
 <% else %>
   <%= link_to "Sign in to list products!", auth_sign_in_path, class: "font-bold hover:underline" %>
 <% end %>
-<ol class="flex flex-col gap-8">
-  <%= render @listings.order(created_at: :desc) %>
-</ol>
+
+<%= render "filters" %>
+
+<%= turbo_frame_tag "listings" do %>
+  <ol class="flex flex-col gap-8">
+    <%= render @listings %>
+  </ol>
+<% end %>

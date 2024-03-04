@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get "/invites/:token/accept", to: "invites#accept", as: :accept_invite
   resources :invites, only: [:index, :new, :create]
 
+  get "listings/filter/:filter", to: "listings#index", as: :filtered_listings
   resources :listings, concerns: :votable, except: [:new, :destroy, :index] do
     resources :comments, only: :create, module: :listings
   end
@@ -22,7 +23,6 @@ Rails.application.routes.draw do
   resources :comments, concerns: :votable, except: [:create, :index] do
     resources :comments, only: :create, module: :comments
   end
-
 
   root "listings#index"
 end

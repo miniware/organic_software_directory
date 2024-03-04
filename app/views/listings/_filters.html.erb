@@ -1,0 +1,4 @@
+<nav class="tabs">
+  <%= link_to "Popular", filtered_listings_path(:popular), class: ("active-tab" if !params[:filter] || params[:filter] == "popular") %>
+  <%= link_to "Recent", filtered_listings_path(:recent), class: ("active-tab" if params[:filter] == "recent") %>
+</nav>

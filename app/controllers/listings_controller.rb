@@ -7,7 +7,14 @@ class ListingsController < ApplicationController
 
   def index
     @new_listing = Listing.new
-    @listings = Listing.popular
+
+    filter = params[:filter]
+    allowed_filters = %w[popular recent]
+    @listings = if filter.present? && allowed_filters.include?(filter)
+      Listing.public_send(filter)
+    else
+      Listing.popular
+    end
   end
 
   def create

@@ -12,8 +12,8 @@
         </h2>
       <% else %>
         <h3>
-          <%= link_to listing.title, listing, class: "font-bold text-xl" %>
-          <%= link_to listing.link, listing.link, class: "text-sm opacity-50 hover:underline" %>
+          <%= link_to listing.title, listing, class: "font-bold text-xl", data: { turbo: false } %>
+          <%= link_to listing.link, listing.link, class: "text-sm opacity-50 hover:underline", data: { turbo: false } %>
         </h3>
       <% end %>
       <% if listing.description.present? %>
@@ -26,11 +26,11 @@
       <% unless is_listing_show %>
         <span class="max-md:hidden">•</span>
         <% comments_label = !listing.comments.any? ? "Start the conversation!" : pluralize(listing.total_comments, 'comment')  %>
-        <%= link_to comments_label, listing_path(listing), class: "font-medium hover:underline" %>
+        <%= link_to comments_label, listing_path(listing), class: "font-medium hover:underline", data: { turbo: false } %>
       <% end %>
       <% if listing.user == current_user %>
         <span class="max-md:hidden">•</span>
-        <%= link_to "Edit", edit_listing_path(listing), class: "font-medium hover:underline" %>
+        <%= link_to "Edit", edit_listing_path(listing), class: "font-medium hover:underline", data: { turbo: false } %>
       <% end %>
     </footer>
   </div>

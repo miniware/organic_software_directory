@@ -87,14 +87,14 @@
   }
 
   .tabs {
-    @apply flex justify-start border-b border-black/30 dark:border-white/20;
+    @apply flex justify-start border-b border-black/20 dark:border-white/20;
 
     a {
       @apply inline-block px-2 border border-black/10 dark:border-white/5 rounded-t -mb-px;
     }
 
     .active-tab {
-      @apply text-orange-900 dark:text-orange-200 border-inherit dark:border-b-orange-950;
+      @apply text-orange-900 dark:text-orange-200 border-inherit border-b-orange-100 dark:border-b-orange-950;
     }
   }
 

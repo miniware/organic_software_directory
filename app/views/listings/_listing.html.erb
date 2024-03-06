@@ -20,17 +20,20 @@
         <p><%= listing.description %></p>
       <% end %>
     </header>
-    <footer class="flex max-md:flex-col md:gap-2 text-sm opacity-50">
-      <%= render "votes/vote", votable: listing %>
-      <p>Posted <%= time_ago_in_words(listing.created_at) %> ago by <%= profile_link_for listing.user %></p>
+    <footer class="text-sm opacity-50 space-y-1">
+      <div class="flex gap-2">
+        <%= render "votes/vote", votable: listing %>
+        <p>Posted <%= time_ago_in_words(listing.created_at) %> ago by <%= profile_link_for listing.user %></p>
+        <% if listing.user == current_user %>
+          <span> • </span>
+          <%= link_to "Edit", edit_listing_path(listing), class: "font-medium hover:underline", data: { turbo: false } %></span>
+        <% end %>
+      </div>
       <% unless is_listing_show %>
-        <span class="max-md:hidden">•</span>
-        <% comments_label = !listing.comments.any? ? "Start the conversation!" : pluralize(listing.total_comments, 'comment')  %>
-        <%= link_to comments_label, listing_path(listing), class: "font-medium hover:underline", data: { turbo: false } %>
-      <% end %>
-      <% if listing.user == current_user %>
-        <span class="max-md:hidden">•</span>
-        <%= link_to "Edit", edit_listing_path(listing), class: "font-medium hover:underline", data: { turbo: false } %>
+        <nav class="flex gap-2">
+          <% comments_label = !listing.comments.any? ? "Start the conversation!" : "Discuss " + pluralize(listing.total_comments, 'comment') + "."  %>
+          <%= link_to comments_label, listing_path(listing), class: "font-medium hover:underline", data: { turbo: false } %>
+        </nav>
       <% end %>
     </footer>
   </div>

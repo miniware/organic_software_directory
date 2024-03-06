@@ -4,13 +4,13 @@
   <% total_votes = votable.votes.count %>
 
   <% vote_display = capture do %>
-    <div class="flex items-center leading-none rounded gap-x-1 px-1 py-0.5 hover:bg-black/20 dark:hover:bg-white/20 bg-black/10 dark:bg-white/10">
+    <div class="inline-flex items-start leading-none rounded gap-x-1 px-1 py-0.5 hover:bg-black/20 dark:hover:bg-white/20 bg-black/10 dark:bg-white/10">
       <span><%= has_voted ? "✦" : "✧" %></span>
       <span class="truncate"><%= total_votes %></span>
     </div>
   <% end %>
 
-  <div class="vote-button">
+  <div class="vote-button inline">
     <% if current_user %>
       <% if has_voted %>
         <%= button_to vote_display, vote_path_for(votable, user_vote), class: "w-full", method: :delete, data: { turbo_method: :delete } %>

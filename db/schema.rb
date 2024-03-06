@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_01_191453) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_06_210852) do
   create_table "comments", force: :cascade do |t|
     t.string "commentable_type", null: false
     t.integer "commentable_id", null: false
@@ -68,6 +68,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_01_191453) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "role", default: "member"
+    t.integer "karma", default: 0, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["handle"], name: "index_users_on_handle", unique: true
   end

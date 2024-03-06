@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :listings
   has_many :comments
+  has_many :votes
 
   enum role: %w[member admin].index_by(&:itself)
 
@@ -19,6 +20,14 @@ class User < ApplicationRecord
     end
   end
 
+  def gain_karma!
+    change_karma_by(1)
+  end
+
+  def damage_karma!
+    change_karma_by(-1)
+  end
+
   passwordless_with :email
   validates :email,
     presence: true,
@@ -35,5 +44,12 @@ class User < ApplicationRecord
 
   def to_param
     handle
+  end
+
+  private
+
+  def change_karma_by amount
+    increment!(:karma, amount) if amount > 0
+    decrement!(:karma, amount.abs) if amount < 0
   end
 end

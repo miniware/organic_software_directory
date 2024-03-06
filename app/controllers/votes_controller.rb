@@ -4,12 +4,14 @@ class VotesController < ApplicationController
 
   def create
     @votable.votes.create(user: current_user)
+    @votable.user.gain_karma!
     update_view
   end
 
   def destroy
     vote = @votable.votes.find_by(user: current_user)
     vote&.destroy
+    @votable.user.damage_karma!
     update_view
   end
 

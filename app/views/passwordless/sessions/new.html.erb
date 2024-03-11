@@ -12,7 +12,7 @@
         required: true,
         autofocus: true,
         placeholder: t("passwordless.sessions.new.email.placeholder") %>
-    <%= f.submit t("passwordless.sessions.new.submit"), class: "button mt-2 float-right" %>
+    <%= f.submit t("passwordless.sessions.new.submit"), class: "button mt-2 float-right relative z-10" %>
   <% end %>
 
   <p class="text-sm mt-1 italic opacity-50">Need an invite? <%= link_to "DM @nickisnoble on Posts", "https://posts.cv/nickisnoble", class: "underline" %> or <%= mail_to "nick@miniware.team", "shoot me an email",

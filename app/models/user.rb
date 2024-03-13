@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_many :listings
   has_many :comments
   has_many :votes
+  has_many :notifications, as: :recipient, dependent: :destroy, class_name: "Noticed::Notification"
 
   enum role: %w[member admin].index_by(&:itself)
 

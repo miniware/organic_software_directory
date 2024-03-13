@@ -5,6 +5,8 @@ class CommentsController < ApplicationController
     @comment = @commentable.comments.new(comment_params)
     @comment.user = current_user
     if @comment.save
+      CommentNotifier.with(record: @comment, on: request.original_url).deliver(@commentable.user)
+
       render turbo_stream: [
         turbo_stream.prepend(comment_section_id, partial: "comments/comment", locals: {comment: @comment}),
         turbo_stream.replace("new_comment_form", partial: "comments/form", locals: {comment: @commentable.comments.build})

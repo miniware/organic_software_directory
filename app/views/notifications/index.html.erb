@@ -1,0 +1,26 @@
+<%= turbo_frame_tag "active-tab" do %>
+  <div class="shadow-lg border-y border-t-white/5 border-b-black/5 bg-white/30 dark:bg-white/5 rounded">
+    <% if @notifications.any? %>
+      <ul class="p-4 grid [grid-template-columns:max-content_1fr] gap-x-2">
+        <% @notifications.order(created_at: :desc).each do |notification| %>
+          <li class="grid grid-cols-subgrid col-span-full items-baseline">
+            <span class="opacity-40 lining-nums italic text-sm"><%= time_ago_in_words(notification.created_at) %> ago:</span>
+            <span>
+              <% case notification.record.class.to_s %>
+              <% when "Comment" %>
+              <% comment = notification.record %>
+              <%# TODO: notification.on is broken – need to give comments awareness of root ancestor %>
+              <%= profile_link_for comment.user %> replied to <%= link_to "“#{comment.commentable}”", notification.on, class: "underline italic", data: { turbo: false } %>
+            <% end %>
+          </span>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <div class="p-8 text-center">
+      <p class="text-5xl mb-2">📭</p>
+      <h2 class="text-xl italic opacity-40">No activity yet!</h2>
+    </div>
+  <% end %>
+</div>
+<% end %>

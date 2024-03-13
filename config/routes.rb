@@ -8,8 +8,10 @@ Rails.application.routes.draw do
   end
 
   get "/@:id", to: "users#show", as: :user
-  get "/@:id/settings", to: "users#edit", as: :edit_user
   patch "/@:id", to: "users#update", as: :update_user
+  get "/@:id/settings", to: "users#edit", as: :edit_user
+  get "/@:id/activity", to: "notifications#index", as: :activity
+
   resources :users, only: [:new, :create]
 
   get "/invites/:token/accept", to: "invites#accept", as: :accept_invite

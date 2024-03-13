@@ -38,3 +38,5 @@ group :test do
   gem "vcr", "~> 6.2"
   gem "webmock", "~> 3.22"
 end
+
+gem "noticed", "~> 2.1"

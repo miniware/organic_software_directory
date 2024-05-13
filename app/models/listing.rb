@@ -52,8 +52,9 @@ class Listing < ApplicationRecord
   end
 
   def not_posted_recently
-    base_url = URI.parse(link).host
-    if Listing.where("created_at >= ?", 1.month.ago).where("link LIKE ?", "%#{base_url}%").exists?
+    base_url = URI.parse(link || "").host
+    recent_listings = Listing.where("created_at >= ?", 1.month.ago).where("link LIKE ?", "%#{base_url}%").where.not(id: id)
+    if recent_listings.exists?
       errors.add(:base, "This link was posted too recently.")
     end
   end

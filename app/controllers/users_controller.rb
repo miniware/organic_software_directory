@@ -21,6 +21,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by!(handle: params[:id])
+    @campfire_url = ENV["CAMPFIRE_JOIN_URL"]
   end
 
   def edit

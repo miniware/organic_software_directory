@@ -15,6 +15,13 @@ class Listing < ApplicationRecord
   validates :title, presence: true, uniqueness: {case_sensitive: false}
   validate :not_posted_recently, on: :create
 
+  normalizes :description,
+    with: ->(text) {
+      text.gsub(/\s+/, " ")
+        .squeeze(" ")
+        .strip
+    }
+
   def to_param
     slug
   end

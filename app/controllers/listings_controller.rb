@@ -13,7 +13,7 @@ class ListingsController < ApplicationController
     @listings = if filter.present? && allowed_filters.include?(filter)
       Listing.public_send(filter)
     else
-      Listing.popular
+      Listing.recent
     end
   end
 

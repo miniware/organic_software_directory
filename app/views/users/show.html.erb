@@ -13,7 +13,6 @@
   <% if current_user && current_user == @user %>
     <nav class="flex gap-1">
       <%= link_to "Update Profile", edit_user_path(current_user), class: "button" %>
-      <%= link_to "Join Chat", @campfire_url, class: "button", target: "_blank", data: { turbo: false } %>
       <%= link_to "Sign Out", auth_sign_out_path, class: "button" %>
     </nav>
   <% end %>

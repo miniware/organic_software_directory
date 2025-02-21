@@ -13,6 +13,10 @@ servers:
       traefik.http.routers.organic_software_directory.entrypoints: websecure
       traefik.http.routers.organic_software_directory.rule: Host(`built.organic`)
       traefik.http.routers.organic_software_directory.tls.certresolver: letsencrypt
+      # block shit requests
+      traefik.http.middlewares.block-wp-login.rule: Path(`/wp-login.php`)
+      traefik.http.middlewares.block-wp-login.status: 403
+      traefik.http.routers.organic_software_directory.middlewares: block-wp-login
 ssh:
   user: root
 

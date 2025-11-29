@@ -5,4 +5,7 @@ if [ "${1}" == "./bin/rails" ] && [ "${2}" == "server" ]; then
   ./bin/rails db:prepare
 fi
 
+# Remove stale pid file if it exists
+rm -f /rails/tmp/pids/server.pid
+
 exec "${@}"

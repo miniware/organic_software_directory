@@ -9,11 +9,6 @@ servers:
   web:
     hosts:
       - 138.197.108.70
-    labels:
-      traefik.http.routers.organic_software_directory.entrypoints: websecure
-      traefik.http.routers.organic_software_directory.rule: Host(`built.organic`)
-      traefik.http.routers.organic_software_directory.tls.certresolver: letsencrypt
-      # block shit requests
 ssh:
   user: root
 
@@ -23,6 +18,7 @@ volumes:
 
 # Credentials for your image host.
 registry:
+  server: ghcr.io
   username: nickisnoble
   password:
     - KAMAL_REGISTRY_PASSWORD
@@ -36,8 +32,8 @@ env:
 
 # Configure builder setup.
 # colima start --arch amd64 --vm-type=vz --vz-rosetta
-# builder:
-#   multiarch: false
+builder:
+  arch: amd64
 
 # Use accessory services (secrets come from .env).
 # accessories:
@@ -62,23 +58,11 @@ env:
 #     directories:
 #       - data:/data
 
-# Configure custom arguments for Traefik
-traefik:
-  options:
-    publish:
-      - "443:443"
-    volume:
-      - "/letsencrypt/acme.json:/letsencrypt/acme.json" # To save the configuration file.
-  args:
-    entryPoints.web.address: ":80"
-    entryPoints.websecure.address: ":443"
-    entryPoints.web.http.redirections.entryPoint.to: websecure # We want to force https
-    entryPoints.web.http.redirections.entryPoint.scheme: https
-    entryPoints.web.http.redirections.entrypoint.permanent: true
-    certificatesResolvers.letsencrypt.acme.email: "donotspam@miniware.team"
-    certificatesResolvers.letsencrypt.acme.storage: "/letsencrypt/acme.json" # Must match the path in `volume`
-    certificatesResolvers.letsencrypt.acme.httpchallenge: true
-    certificatesResolvers.letsencrypt.acme.httpchallenge.entrypoint: web # Must match the role in `servers`
+# Configure kamal-proxy
+proxy:
+  ssl: true
+  host: built.organic
+  app_port: 3000
 
 # Configure a custom healthcheck (default is /up on port 3000)
 # healthcheck:

@@ -1,0 +1,24 @@
+{
+  "version": "1.0",
+  "services": {
+    "web": {
+      "port": 3000,
+      "volumes": [
+        {
+          "name": "storage",
+          "destinationPath": "/rails/storage"
+        }
+      ]
+    },
+    "hook:deploy:start:before": {
+      "type": "command",
+      "command": "./bin/rails db:prepare",
+      "volumes": [
+        {
+          "name": "storage",
+          "destinationPath": "/rails/storage"
+        }
+      ]
+    }
+  }
+}
